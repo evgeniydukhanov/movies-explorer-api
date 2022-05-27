@@ -1,3 +1,3 @@
 # movies-explorer-api
 
-branch check
+## Backend часть дипломной работы на Я.Практикум
