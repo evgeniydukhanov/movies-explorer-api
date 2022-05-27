@@ -69,6 +69,7 @@ module.exports.login = (req, res, next) => {
       });
       // вернули токен
       res.send({ token });
+      // console.log(token);
     })
     .catch(next);
 };
