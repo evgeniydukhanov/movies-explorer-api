@@ -26,7 +26,7 @@ module.exports.getMovies = (req, res, next) => {
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  Movie.findById(req.params.cardId)
+  Movie.findById(req.params.movieId)
     .orFail()
     .catch(() => new NotFoundError('Фильм не найден'))
     .then((movie) => {
