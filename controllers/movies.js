@@ -26,12 +26,10 @@ module.exports.getMovies = (req, res, next) => {
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  // console.log(req.params);
   Movie.findById(req.params.cardId)
     .orFail()
     .catch(() => new NotFoundError('Фильм не найден'))
     .then((movie) => {
-      // console.log(movie);
       if (req.user._id !== movie.owner.toString()) {
         throw new ForbiddenError('Вы не можете удалить чужой сохраненный фильм');
       }

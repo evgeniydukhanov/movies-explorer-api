@@ -51,7 +51,6 @@ module.exports.patchProfile = (req, res, next) => {
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
-
   return User.findUserByCredentials(email, password)
     .then((user) => {
       // создадим токен
@@ -64,12 +63,11 @@ module.exports.login = (req, res, next) => {
       res.cookie('jwt', token, {
         maxAge: 3600000,
         httpOnly: true,
-        secure: true,
+        // secure: true,
         sameSite: 'None',
       });
       // вернули токен
       res.send({ token });
-      // console.log(token);
     })
     .catch(next);
 };
