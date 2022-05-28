@@ -38,6 +38,8 @@ const allowedCors = [
   'https://127.0.0.1:3000',
   'http://localhost:3000',
   'http://localhost:3030',
+  'http://lookatme.nomoredomains.xyz',
+  'https://lookatme.nomoredomains.xyz',
 ];
 
 // eslint-disable-next-line prefer-arrow-callback
