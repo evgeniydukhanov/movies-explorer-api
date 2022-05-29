@@ -2,4 +2,6 @@
 
 ## Backend часть дипломной работы на Я.Практикум
 
-Публичный cервер - lookatme.nomoredomains.xyz
+API - https://api.lookatme.nomoreparties.sbs
+
+Публийчный IP - 51.250.97.160
