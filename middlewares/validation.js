@@ -1,5 +1,5 @@
 const { celebrate, Joi } = require('celebrate');
-const validator = require('validator/lib/isURL');
+const validator = require('validator');
 const { errMessages } = require('../utils/constants');
 
 module.exports.patchProfileValidityCheck = celebrate({
