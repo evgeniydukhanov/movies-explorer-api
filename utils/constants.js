@@ -12,4 +12,17 @@ const allowedCors = [
   'https://lookatme.nomoredomains.xyz',
 ];
 
-module.exports = { allowedCors };
+const errMessages = {
+  linkError: 'Это поле должно содержать ссылку',
+  dataError: 'Переданы неккоректные данные',
+  movieNotFoundError: 'Фильм не найден',
+  deleteMovieError: 'Вы не можете удалить чужой сохраненный фильм',
+  userNotFoundError: 'Указанный пользователь не найден',
+  conflictError: 'Пользователь с таким EMAIL уже зарегистрирован',
+  authorizationError: 'Ошибка авторизации',
+  crashTest: 'Сервер сейчас упадёт',
+  loginError: 'Неправильные почта ли пароль',
+  wrongPathError: 'По указанному пути ничего нет',
+};
+
+module.exports = { allowedCors, errMessages };

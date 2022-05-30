@@ -25,6 +25,7 @@ const cors = require('./middlewares/cors');
 const routes = require('./routes');
 const limiter = require('./middlewares/limiter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { errMessages } = require('./utils/constants');
 
 app.use(cors);
 
@@ -34,7 +35,7 @@ app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
+    throw new Error(errMessages.crashTest);
   }, 0);
 });
 

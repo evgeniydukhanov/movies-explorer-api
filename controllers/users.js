@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const ConflictError = require('../errors/ConflictError');
 const NotFoundError = require('../errors/NotFoundError');
+const { errMessages } = require('../utils/constants');
 
 const { JWT_SECRET_KEY = 'test' } = process.env;
 
@@ -29,7 +30,7 @@ module.exports.createUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.code === 11000) {
-        next(new ConflictError('Пользователь с таким EMAIL уже зарегистрирован'));
+        next(new ConflictError(errMessages.conflictError));
       } else {
         next(err);
       }
@@ -49,7 +50,7 @@ module.exports.patchProfile = (req, res, next) => {
       if (user && user._id !== req.user._id) {
         // console.log(user._id === req.user._id);
 
-        throw new ConflictError('Пользователь с таким EMAIL уже зарегистрирован');
+        throw new ConflictError(errMessages.conflictError);
       }
       return findAndModify();
     })
@@ -90,7 +91,7 @@ module.exports.getMe = (req, res, next) => {
   User.find({ _id })
     .then((user) => {
       if (!user) {
-        return next(new NotFoundError('Указанный пользователь не найден'));
+        return next(new NotFoundError(errMessages.userNotFoundError));
       }
       return res.send(...user);
     })

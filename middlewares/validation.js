@@ -1,5 +1,6 @@
 const { celebrate, Joi } = require('celebrate');
 const validator = require('validator/lib/isURL');
+const { errMessages } = require('../utils/constants');
 
 module.exports.patchProfileValidityCheck = celebrate({
   body: Joi.object().keys({
@@ -19,19 +20,19 @@ module.exports.createMovieValidityCheck = celebrate({
       if (validator.isURL(value)) {
         return value;
       }
-      return helpers.message('Это поле должно содержать ссылку');
+      return helpers.message(errMessages.linkError);
     }),
     trailerLink: Joi.string().required().custom((value, helpers) => {
       if (validator.isURL(value)) {
         return value;
       }
-      return helpers.message('Это поле должно содержать ссылку');
+      return helpers.message(errMessages.linkError);
     }),
     thumbnail: Joi.string().required().custom((value, helpers) => {
       if (validator.isURL(value)) {
         return value;
       }
-      return helpers.message('Это поле должно содержать ссылку');
+      return helpers.message(errMessages.linkError);
     }),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
