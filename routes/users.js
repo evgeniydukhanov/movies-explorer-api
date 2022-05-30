@@ -1,4 +1,3 @@
-/* eslint-disable function-paren-newline */
 const router = require('express').Router();
 
 const { patchProfile, getMe } = require('../controllers/users');

@@ -1,7 +1,5 @@
-/* eslint-disable func-names */
 const { allowedCors } = require('../utils/constants');
 
-// eslint-disable-next-line prefer-arrow-callback
 module.exports = (function (req, res, next) {
   const { origin } = req.headers;
   if (allowedCors.includes(origin)) {

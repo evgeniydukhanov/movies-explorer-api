@@ -1,10 +1,8 @@
-require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const ConflictError = require('../errors/ConflictError');
 const NotFoundError = require('../errors/NotFoundError');
-const ValidationError = require('../errors/ValidationError');
 
 const { JWT_SECRET_KEY = 'test' } = process.env;
 
@@ -32,21 +30,36 @@ module.exports.createUser = (req, res, next) => {
     .catch((err) => {
       if (err.code === 11000) {
         next(new ConflictError('Пользователь с таким EMAIL уже зарегистрирован'));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
 module.exports.patchProfile = (req, res, next) => {
   const { name, email } = req.body;
-  User.findByIdAndUpdate(req.user._id, { name, email }, { runValidators: true })
-    .then((user) => res.send({ _id: user._id, name, email }))
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        next(new ValidationError('Переданы некорректные данные'));
+  const findAndModify = () => User.findByIdAndUpdate(
+    req.user._id,
+    { name, email },
+    { runValidators: true },
+  );
+
+  User.find({ email })
+    .then(([user]) => {
+      if (user && user._id !== req.user._id) {
+        // console.log(user._id === req.user._id);
+
+        throw new ConflictError('Пользователь с таким EMAIL уже зарегистрирован');
       }
-      next(err);
-    });
+      return findAndModify();
+    })
+    .then(() => {
+      res.send({
+        name,
+        email,
+      });
+    })
+    .catch(next);
 };
 
 module.exports.login = (req, res, next) => {

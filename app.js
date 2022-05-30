@@ -1,4 +1,4 @@
-/* eslint-disable func-names */
+require('dotenv').config();
 const express = require('express');
 
 const { errors } = require('celebrate');
