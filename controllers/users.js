@@ -47,7 +47,7 @@ module.exports.patchProfile = (req, res, next) => {
 
   User.find({ email })
     .then(([user]) => {
-      if (user && user._id !== req.user._id) {
+      if (user && user._id.toString() !== req.user._id) {
         // console.log(user._id === req.user._id);
 
         throw new ConflictError(errMessages.conflictError);
