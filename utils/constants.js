@@ -10,6 +10,8 @@ const allowedCors = [
   'http://localhost:3030',
   'http://lookatme.nomoredomains.xyz',
   'https://lookatme.nomoredomains.xyz',
+  'https://s6b2vl.csb.app',
+  'http://s6b2vl.csb.app',
 ];
 
 const errMessages = {

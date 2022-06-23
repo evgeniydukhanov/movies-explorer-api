@@ -47,7 +47,7 @@ module.exports.patchProfile = (req, res, next) => {
 
   User.find({ email })
     .then(([user]) => {
-      if (user && user._id !== req.user._id) {
+      if (user && user._id.toString() !== req.user._id) {
         // console.log(user._id === req.user._id);
 
         throw new ConflictError(errMessages.conflictError);
@@ -99,6 +99,11 @@ module.exports.getMe = (req, res, next) => {
 };
 
 module.exports.signOut = (req, res) => {
-  res.clearCookie('jwt');
+  res.cookie('jwt', '', {
+    maxAge: 0,
+    httpOnly: true,
+    secure: true,
+    sameSite: 'None',
+  });
   res.send({ message: 'Вы вышли из системы' });
 };
